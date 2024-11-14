@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Quiz das 5 Linguagens do Amor</title>
+ 
+    </head>
+    <body>
+
+        <h1>Quiz das 5 Linguagens do Amor</h1>
+        <div class="quiz-container">
+        <div id="quiz">
+        <div class="question" id="question">Qual é a primeira pergunta?</div>
+        <ul class="answers">
+            <li><button onclick="answer(1)">Resposta 1</button></li>
+                <li><button onclick="answer(2)">Resposta 2</button></li>
+                <li><button onclick="answer(3)">Resposta 3</button></li>
+                <li><button onclick="answer(4)">Resposta 4</button></li>
+        </ul>
+        </div>
+        <div id="result"></div>
+        <p>Seu principal idioma do amor é: <span id="language"></span></p>
+        </div>
+    </div>
+
+    <script>
+        { text: "Ser elogiado", language; "Palavras de Afirmação" }
+                    { text: "Uma ajuda prática", language; "Atos de Serviço" }
+                    { text: "Receber um presente", language; "Receber Presentes" }
+                    { text: "Passar tempo juntos", language;"Tempo de Qualidade" }
+                
+            
+            {
+                questions: "O que faz você se sentir mais amado?",
+                answers; [
+                { text: "Ser elogiado", language: "Palavras de Afirmação" },
+                    { text: "Uma ajuda prática", language: "Atos de Serviço" },
+                    { text: "Receber um presente", language: "Receber Presentes" },
+                    { text: "Passar tempo juntos", language: "Tempo de Qualidade" }
+                ]
+            }
+
+                question: "O que você mais valoriza em um relacionamento?",
+                answers; [
+                    { text: "Saber que é importante para a pessoa", language: "Palavras de Afirmação" },
+                    { text: "Ações que mostram que a pessoa se importa", language: "Atos de Serviço" },
+                    { text: "Presentes pensados com carinho", language: "Receber Presentes" },
+                    { text: "Estar presente e disponível para você", language: "Tempo de Qualidade" }
+                ]
+
+                question: "Como você demonstra seu amor?",
+                answers; [
+                    { text: "Com palavras doces e elogios", language: "Palavras de Afirmação" },
+                    { text: "Ajudando em tarefas e cuidados", language: "Atos de Serviço" },
+                    { text: "Dando presentes", language: "Receber Presentes" },
+                    { text: "Com abraços e carícias", language: "Toque Físico" }
+        ]
+
+        question: "Qual dessas opções mais te atrai?",
+                answers; [
+                    { text: "Ouvir uma palavra de apoio", language: "Palavras de Afirmação" },
+                    { text: "Ver a pessoa ajudando você", language: "Atos de Serviço" },
+                    { text: "Receber algo surpresa", language: "Receber Presentes" },
+                    { text: "Estar ao lado da pessoa sem pressa", language: "Tempo de Qualidade" }
+        ]
+
+        let currentQuestion = 0;
+        let scores = {
+            "Palavras de Afirmação": 0,
+            "Atos de Serviço": 0,
+            "Receber Presentes": 0,
+            "Tempo de Qualidade": 0,
+            "Toque Físico": 0
+        };
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById("question").textContent = question.question;
+            const answersList = document.querySelector(".answers");
+            answersList.innerHTML = '';
+            question.answers.forEach((answer, index) => {
+                const button = document.createElement("button");
+                button.textContent = answer.text;
+                button.onclick = () => answerQuestion(answer.language);
+                const li = document.createElement("li");
+                li.appendChild(button);
+                answersList.appendChild(li);
+            });
+        }
+
+        function answer(language) {
+            scores[language]++;
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+    
+
+function showResult() {
+    let maxScore = 0;
+    let mainLanguage = '';
+    for (const language in scores) {
+        if (scores[language] > maxScore) {
+            maxScore = scores[language];
+            mainLanguage = language;
+        }
+    }
+            document.getElementById("quiz").style.display = 'none';
+            document.getElementById("result").style.display = 'block';
+            document.getElementById("language").textContent = mainLanguage;
+        }
+        loadQuestion();
+    </script>
+
+
+
+
+
+    </body>   
+
+</html>
